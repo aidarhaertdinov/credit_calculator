@@ -16,7 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework.routers import SimpleRouter
+from bank.views import ClientViewSet, BankViewSet, CreditOfferViewSet, CreditViewSet
+
+router = SimpleRouter()
+router.register(r'api/clients', ClientViewSet)
+router.register(r'api/banks', BankViewSet)
+router.register(r'api/credit_offers', CreditOfferViewSet)
+router.register(r'api/credits', CreditViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += router.urls
