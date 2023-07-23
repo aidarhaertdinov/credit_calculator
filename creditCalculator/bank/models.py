@@ -14,20 +14,27 @@ class Bank(models.Model):
     name = models.CharField(max_length=100)
 
 
-class CreditOffer(models.Model):
-    bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
 
-    credit_limit = models.DecimalField(max_digits=11, decimal_places=2)
-    interest_rate = models.DecimalField(max_digits=4, decimal_places=2)  # Процентная ставка
+class CreditOffer(models.Model):
+    bank = models.ForeignKey(Bank, null=True, on_delete=models.SET_NULL)
+    client = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
+
+    credit_term = models.IntegerField() # срок кредита
+    amount_credit = models.FloatField() # сумма кредита
+
+    # payment_list = models.ForeignKey(Payment, null=True, on_delete=models.SET_NULL)  #список сущностей ежемесячный платеж
 
 
 class Credit(models.Model):
     credit_offer = models.OneToOneField(CreditOffer, on_delete=models.CASCADE, primary_key=True)
 
-    amount_credit = models.DecimalField(max_digits=11, decimal_places=2)  # сумма кредита
-    payment_schedule = models.DateField()  # график платежей
-    payment_date = models.DateField()  # дата платежа
-    payment_amount = models.DecimalField(max_digits=11, decimal_places=2)  # сумма платежа
-    repayment_amount_body = models.DecimalField(max_digits=11, decimal_places=2)  # Сумма гашения тела кредита
-    repayment_amount_interest = models.DecimalField(max_digits=11, decimal_places=2)  # Сумма гашения процентов
+    credit_limit = models.FloatField() # лимит по кредиту
+    interest_rate = models.FloatField()  # Процентная ставка
+
+
+class Payment(models.Model):
+    payment_date = models.IntegerField()  # дата платежа
+    payment_amount = models.FloatField()  # сумма платежа
+    principal_amount = models.FloatField()  # Сумма гашения тела кредита
+    interest_amount = models.FloatField()  # Сумма гашения процентов
+    credit_offer = models.ForeignKey(CreditOffer, null=True, on_delete=models.SET_NULL)

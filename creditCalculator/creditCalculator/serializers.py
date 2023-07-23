@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from bank.models import Bank, CreditOffer, Credit, Client
+from bank.models import Bank, CreditOffer, Credit, Client, Payment
 
 
 class ClientSerializer(ModelSerializer):
@@ -26,4 +26,7 @@ class CreditSerializer(ModelSerializer):
         fields = '__all__'
 
 
-
+class PaymentSerializer(ModelSerializer):
+    class Meta:
+        model = Payment
+        fields = '__all__'

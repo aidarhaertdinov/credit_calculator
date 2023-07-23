@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'creditCalculator.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bank_db',
+        'NAME': 'bank_app_db',
     }
 }
 
