@@ -16,21 +16,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from rest_framework.routers import SimpleRouter
-from bank.views import ClientViewSet, BankViewSet, CreditOfferViewSet, CreditViewSet, PaymentViewSet
+from rest_framework.routers import DefaultRouter
+from bank.views import ClientViewSet, BankViewSet, CreditOfferViewSet, CreditViewSet, \
+    PaymentViewSet, get_payment, home, create_bank
 from bank import views
 
-router = SimpleRouter()
-router.register(r'api/clients', ClientViewSet)
-router.register(r'api/banks', BankViewSet)
-router.register(r'api/credit_offers', CreditOfferViewSet)
-router.register(r'api/credits', CreditViewSet)
-# router.register(r'api/get_payment', PaymentViewSet)
-#
+router = DefaultRouter()
+router.register(r'api/v1/clients', ClientViewSet)
+router.register(r'api/v1/banks', BankViewSet)
+router.register(r'api/v1/credit_offers', CreditOfferViewSet)
+router.register(r'api/v1/credits', CreditViewSet)
+router.register(r'api/v1/payments', PaymentViewSet)
+# print(router.urls)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/get_payment/', views.PaymentViewSet.get_payment),
+    path('', home),
+    path('create_bank/', create_bank),
+    path('get_payment/', get_payment),
+    path('create_payment/', PaymentViewSet.create_payment),
+
 
 ]
 

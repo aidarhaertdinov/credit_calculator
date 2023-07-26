@@ -1,3 +1,4 @@
+
 from django.db import models
 
 
@@ -20,8 +21,8 @@ class CreditOffer(models.Model):
     client = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
 
     credit_term = models.IntegerField() # срок кредита
-    amount_credit = models.FloatField() # сумма кредита
-
+    credit_amount = models.FloatField() # сумма кредита
+    credit_date = models.DateField(auto_now=True)
     # payment_list = models.ForeignKey(Payment, null=True, on_delete=models.SET_NULL)  #список сущностей ежемесячный платеж
 
 
@@ -33,7 +34,9 @@ class Credit(models.Model):
 
 
 class Payment(models.Model):
-    payment_date = models.IntegerField()  # дата платежа
+    date = models.DateField()
+    # payment_date = models.IntegerField()
+    # дата платежа
     payment_amount = models.FloatField()  # сумма платежа
     principal_amount = models.FloatField()  # Сумма гашения тела кредита
     interest_amount = models.FloatField()  # Сумма гашения процентов

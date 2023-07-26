@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Главная</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<body>
+<div class="container">
+    <div th:insert="blocks/header :: header"></div>
+    <div class="form-group col-2">
+        <form action="/credits_offers/create" method="get">
+            <button class="btn btn-outline-primary" type="submit">Создать кредитное предложение </button>
+        </form>
+    </div>
+    <div class="form-group col-2">
+        <form action="/clients/create">
+            <button class="btn btn-outline-primary" type="submit">Добавить нового клиента</button>
+        </form>
+    </div>
+    <div class="form-group col-2">
+        <form action="/credits/create">
+            <button class="btn btn-outline-primary" type="submit">Создать кредит</button>
+        </form>
+    </div>
+    <div class="form-group col-2">
+        <form action="create_bank">
+            <button class="btn btn-outline-primary" type="submit">Создать банк</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
