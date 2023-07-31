@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title%} Кредитное предложение {% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+          <form method="POST">
+                {% csrf_token %}
+            <table>
+                {{ form }}
+            </table>
+            <input type="submit" value="Send" >
+            </form>
+    </div>
+{% endblock %}

@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 from bank.views import ClientViewSet, BankViewSet, CreditOfferViewSet, CreditViewSet, \
-    PaymentViewSet, get_payment, home, create_bank
+    PaymentViewSet, get_payment, home, create_bank, create_client, create_credit, create_credit_offer
 from bank import views
 
 router = DefaultRouter()
@@ -31,10 +31,12 @@ router.register(r'api/v1/payments', PaymentViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
-    path('create_bank/', create_bank),
-    path('get_payment/', get_payment),
-    path('create_payment/', PaymentViewSet.create_payment),
+    path('', home, name='home'),
+    path('create_bank/', create_bank, name='create_bank'),
+    path('create_client/', create_client, name='create_client'),
+    path('create_credit/', create_credit, name='create_credit'),
+    path('create_credit_offer/', create_credit_offer, name='create_credit_offer'),
+    path('get_payment/', get_payment, name='get_payment'),
 
 
 ]
