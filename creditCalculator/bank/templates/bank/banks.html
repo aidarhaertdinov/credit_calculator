@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Банки {% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="btn-group" role="group">
+		<a class="btn btn-outline-info" href="{% url 'create_bank' %}">Создать банк</a>
+	</div>
+</div>
+<div class="container">
+	<table class="table table-hover table-sm text-center" border="1">
+		<thead class="thead-dark">
+    		<tr>
+				<th scope="col">№</th>
+				<th scope="col">Название банка</th>
+				<th scope="col">Изменить</th>
+				<th scope="col">Удалить</th>
+    		</tr>
+  		</thead>
+	{% for bank in banks %}
+	<tr>
+		<td> </td>
+		<td> {{ bank.name}}</td>
+		<td> <a href="{% url 'edit_bank' bank.pk  %}"><img class="icon-edit" src="{% static 'bank/images/icon-edit.png' %}"></a> </td>
+		<td> <a href="{% url 'delete_bank' bank.pk %}"><img class="icon-delete" src="{% static 'bank/images/icon-delete.png' %}"></a> </td>
+	</tr>
+	{% endfor %}
+	</table>
+</div>
+{% endblock %}

@@ -1,12 +1,14 @@
 <!DOCTYPE HTML>
+{% load static %}
 <html lang="en">
 <head>
     <title>{% block title %}Главная{% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="{% static 'bank/css/styles.css' %}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #DCDCDC;">
-  <a class="navbar-brand" href="{% url 'home' %}">Кредитный калькулятор</a>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="{% url 'home' %}"><img class="icon-calculator" src="{% static 'bank/images/icon-calculator.png' %}"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -14,19 +16,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'create_credit_offer' %}">Создать кредитное предложение <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'get_credit_offer' %}">Кредитные предложения <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'create_client' %}">Добавить нового клиента <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'get_clients' %}">Клиенты <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'create_credit' %}">Создать кредит <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'get_credits' %}">Кредиты <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'create_bank' %}">Создать банк <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'get_banks' %}">Банки <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link text-danger" href='admin'">Админ панель <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-danger" href='admin' >Админ панель <span class="sr-only">(current)</span></a>
       </li>
     </ul>
   </div>

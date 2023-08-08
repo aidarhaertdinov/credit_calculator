@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title%} Создать нового клиента {% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row justify-content-md-left">
+            <div class="col-md-6">
+
+              <form method="POST" novalidate>
+                    {% csrf_token %}
+                <table>
+                    {{ form|crispy}}
+                </table>
+                <button type="submit" class="btn btn-success">Отправить</button>
+              </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
