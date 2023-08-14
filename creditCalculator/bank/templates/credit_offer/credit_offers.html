@@ -16,8 +16,9 @@
 				<th scope="col">№</th>
 				<th scope="col">Название банка</th>
                 <th scope="col">Клиент</th>
-                <th scope="col">Срок кредита в месяцах</th>
-                <th scope="col">Сумма кредита</th>
+                <th scope="col">Срок кредитного предложения в месяцах</th>
+                <th scope="col">Сумма кредитного предложения</th>
+				<th scope="col">Процентная ставка</th>
                 <th scope="col">Дата создания</th>
 				<th scope="col">График платежей</th>
 				<th scope="col">Изменить</th>
@@ -31,8 +32,9 @@
         <td> {{ credit_offer.client}}</td>
         <td> {{ credit_offer.credit_term}}</td>
         <td> {{ credit_offer.credit_amount}}</td>
+		<td> {{ credit_offer.interest_rate}}</td>
         <td> {{ credit_offer.credit_date}}</td>
-		<td> <a href="{% url 'get_payment' credit_offer.pk  %}">
+		<td> <a href="{% url 'get_payment_for_credit_offer' credit_offer.pk  %}">
 			<img class="icon-payment" src="{% static 'bank/images/icon-payment.png' %}"></a> </td>
 
 		<td> <a href="{% url 'edit_credit_offer' credit_offer.pk  %}">

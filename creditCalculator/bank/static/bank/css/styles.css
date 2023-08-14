@@ -9,6 +9,10 @@ h1 {
     margin-bottom: 2%;
 }
 
+.btn-group {
+    margin-bottom: 2%;
+}
+
 .icon-calculator {
     width: 50px;
 }
@@ -25,4 +29,6 @@ h1 {
 .nav-item a:hover::after {
     transform: scale(1);
 }
+
+
 

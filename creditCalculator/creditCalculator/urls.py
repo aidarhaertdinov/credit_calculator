@@ -18,9 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 from bank.views import ClientViewSet, BankViewSet, CreditOfferViewSet, CreditViewSet, \
-    PaymentViewSet, get_payment, home, create_bank, create_client, create_credit, create_credit_offer, get_clients, \
+    PaymentViewSet, get_payment_for_credit_offer, home, create_bank, create_client, create_credit, create_credit_offer, \
+    get_clients, \
     edit_client, delete_client, get_banks, edit_bank, delete_bank, get_credits, edit_credit, delete_credit, \
-    get_credit_offer, delete_credit_offer, edit_credit_offer
+    get_credit_offer, delete_credit_offer, edit_credit_offer, get_payment_for_credit
 from bank import views
 
 router = DefaultRouter()
@@ -29,7 +30,7 @@ router.register(r'api/v1/banks', BankViewSet)
 router.register(r'api/v1/credit_offers', CreditOfferViewSet)
 router.register(r'api/v1/credits', CreditViewSet)
 router.register(r'api/v1/payments', PaymentViewSet)
-# print(router.urls)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
@@ -55,7 +56,9 @@ urlpatterns = [
     path("edit_credit_offer/<int:credit_offer_id>/", edit_credit_offer, name='edit_credit_offer'),
     path("delete_credit_offer/<int:credit_offer_id>/", delete_credit_offer, name='delete_credit_offer'),
 
-    path('get_payment/<int:credit_offer_id>/', get_payment, name='get_payment'),
+    path('get_payment_credit/<int:credit_id>/', get_payment_for_credit, name='get_payment_for_credit'),
+    path('get_payment_credit_offer/<int:credit_offer_id>/', get_payment_for_credit_offer,
+         name='get_payment_for_credit_offer'),
 
 
 ]

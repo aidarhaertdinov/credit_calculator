@@ -9,7 +9,8 @@ from rest_framework.viewsets import ModelViewSet
 from bank.models import Bank, CreditOffer, Credit, Client, Payment
 from creditCalculator.serializers import CreditSerializer, CreditOfferSerializer, \
     ClientSerializer, BankSerializer, PaymentSerializer
-from service.credit_office_service import generate_payment_list
+from service.credit_office_service import generate_payment_list_for_credit_offer
+from service.credit_service import generate_payment_list_for_credit
 from .forms import BankForm, ClientForm, CreditForm, CreditOfferForm
 
 
@@ -42,16 +43,23 @@ def home(request):
     return render(request, 'base.html')
 
 
-def get_payment(request, credit_offer_id):
+def get_payment_for_credit_offer(request, credit_offer_id):
     credit_offer = CreditOffer.objects.get(credit_offer_id=credit_offer_id)
-    credit = Credit.objects.filter(credit_offer=credit_offer)
-    list_payments = generate_payment_list(credit, credit_offer)
+    list_payments = generate_payment_list_for_credit_offer(credit_offer)
 
     return render(request, 'payment/payments.html', {'list_payments': list_payments})
 
 
-def delete_payment(credit_offer):
-    return Payment.objects.filter(credit_offer=credit_offer).delete()
+def get_payment_for_credit(request, credit_id):
+    credit = Credit.objects.get(credit_id=credit_id)
+    credit_offer = CreditOffer.objects.filter(credit=credit)
+    list_payments = generate_payment_list_for_credit(credit, credit_offer)
+
+    return render(request, 'payment/payments.html', {'list_payments': list_payments})
+
+
+def delete_payment(credit):
+    return Payment.objects.filter(credit=credit).delete()
 
 
 def get_banks(request):
@@ -176,7 +184,7 @@ def create_credit_offer(request):
         form = CreditOfferForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('')
     else:
         form = CreditOfferForm()
     return render(request, "credit_offer/post_credit_offer.html", {"form": form})

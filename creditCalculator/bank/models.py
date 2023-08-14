@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
@@ -27,8 +28,10 @@ class CreditOffer(models.Model):
     bank = models.ForeignKey(Bank, null=True, on_delete=models.SET_NULL)
     client = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
 
-    credit_term = models.IntegerField()  # срок кредита
+    credit_term = models.IntegerField(validators=[MaxValueValidator(360),
+                                                  MinValueValidator(1)]) # срок кредита
     credit_amount = models.FloatField()  # сумма кредита
+    interest_rate = models.FloatField()
     credit_date = models.DateField(auto_now=True)
     # payment_list = models.ForeignKey(Payment, null=True, on_delete=models.SET_NULL)  #список сущностей ежемесячный платеж
 
@@ -40,11 +43,11 @@ class Credit(models.Model):
     credit_id = models.AutoField(primary_key=True)
     credit_offer = models.OneToOneField(CreditOffer, on_delete=models.CASCADE)
     credit_name = models.CharField(max_length=50)
-    credit_limit = models.FloatField()  # лимит по кредиту
-    interest_rate = models.FloatField()  # Процентная ставка
+    credit_term = models.IntegerField(validators=[MaxValueValidator(360),
+                                                  MinValueValidator(1)])
+    credit_amount = models.FloatField()  # сумма кредита
+    credit_date = models.DateField(auto_now=True)
 
-    def __str__(self):
-        return self.credit_name
 
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
@@ -54,4 +57,4 @@ class Payment(models.Model):
     principal_amount = models.FloatField()  # Сумма гашения тела кредита
     interest_amount = models.FloatField()  # Сумма гашения процентов
     debt_balance = models.FloatField() #остаток
-    credit_offer = models.ForeignKey(CreditOffer, null=True, on_delete=models.SET_NULL)
+    credit = models.ForeignKey(Credit, null=True, on_delete=models.SET_NULL)

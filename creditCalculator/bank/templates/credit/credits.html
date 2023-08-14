@@ -15,9 +15,12 @@
     		<tr>
 				<th scope="col">№</th>
 				<th scope="col">Название кредита</th>
-                <th scope="col">Лимит по кредиту</th>
+				<th scope="col">Срок кредита в месяцах</th>
+                <th scope="col">Сумма кредита</th>
                 <th scope="col">Процентная ставка</th>
+				<th scope="col">Дата создания</th>
                 <th scope="col">Кредитное предложение</th>
+				<th scope="col">График платежей</th>
 				<th scope="col">Изменить</th>
 				<th scope="col">Удалить</th>
     		</tr>
@@ -26,10 +29,13 @@
 	<tr>
 		<td> </td>
         <td> {{ credit.credit_name}}</td>
-        <td> {{ credit.credit_limit}}</td>
-        <td> {{ credit.interest_rate}}</td>
-        <td> {{ credit.credit_offer.bank}}</td>
-
+		<td> {{ credit.credit_term}}</td>
+		<td> {{ credit.credit_amount}}</td>
+		<td> {{ credit.credit_offer.interest_rate}}</td>
+        <td> {{ credit.credit_date}}</td>
+        <td> {{ credit.credit_offer.bank}} {{ credit.credit_offer.client }} </td>
+		<td> <a href="{% url 'get_payment_for_credit' credit.pk  %}">
+			<img class="icon-payment" src="{% static 'bank/images/icon-payment.png' %}"></a> </td>
 		<td> <a href="{% url 'edit_credit' credit.pk  %}"><img class="icon-edit" src="{% static 'bank/images/icon-edit.png' %}"></a> </td>
 		<td> <a href="{% url 'delete_credit' credit.pk   %}"><img class="icon-delete" src="{% static 'bank/images/icon-delete.png' %}"></a> </td>
 	</tr>

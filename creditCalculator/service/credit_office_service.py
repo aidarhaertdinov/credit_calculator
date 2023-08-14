@@ -4,10 +4,9 @@ from dateutil.relativedelta import relativedelta
 import bank.views
 
 
-def generate_payment_list(сredit, creditOffer):
+def generate_payment_list_for_credit_offer(creditOffer):
 
-    bank.views.delete_payment(creditOffer)
-    p = сredit[0].interest_rate / 12 / 100
+    p = creditOffer.interest_rate / 12 / 100
     monthly_payment = round(creditOffer.credit_amount *
                             (p * math.pow((1 + p), creditOffer.credit_term) /
                              ((math.pow((1 + p), creditOffer.credit_term) - 1))), 2)
@@ -21,9 +20,8 @@ def generate_payment_list(сredit, creditOffer):
                           payment_amount=monthly_payment,
                           principal_amount=principal_amount,
                           interest_amount=interest_amount,
-                          debt_balance=summary,
-                          credit_offer=creditOffer)
-        payment.save()
+                          debt_balance=summary)
         payment_list.append(payment)
 
     return payment_list
+
