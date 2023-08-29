@@ -30,5 +30,12 @@ h1 {
     transform: scale(1);
 }
 
+#registration {
+    height: 50%;
+}
+
+.form-group {
+    margin-bottom: 0.5em;
+}
 
 

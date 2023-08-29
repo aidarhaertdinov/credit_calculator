@@ -33,16 +33,21 @@ class CreditOffer(models.Model):
     credit_amount = models.FloatField()  # сумма кредита
     interest_rate = models.FloatField()
     credit_date = models.DateField(auto_now=True)
-    # payment_list = models.ForeignKey(Payment, null=True, on_delete=models.SET_NULL)  #список сущностей ежемесячный платеж
 
     def __str__(self):
         return f'{self.bank} {self.client} {self.credit_term} {self.credit_amount} {self.credit_date}'
 
 
 class Credit(models.Model):
+    class StatusChoices(models.TextChoices):
+        CONSUMER_CREDIT = "Потребительский кредит"
+        CAR_LOAN = "Автокредит"
+        MORTGAGE_LOAN = "Ипотечный кредит"
+
     credit_id = models.AutoField(primary_key=True)
     credit_offer = models.OneToOneField(CreditOffer, on_delete=models.CASCADE)
-    credit_name = models.CharField(max_length=50)
+    credit_name = models.CharField(choices=StatusChoices.choices,
+        default=StatusChoices.CONSUMER_CREDIT)
     credit_term = models.IntegerField(validators=[MaxValueValidator(360),
                                                   MinValueValidator(1)])
     credit_amount = models.FloatField()  # сумма кредита

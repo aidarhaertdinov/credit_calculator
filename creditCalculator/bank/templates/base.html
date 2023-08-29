@@ -12,8 +12,9 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+    {% if user.is_authenticated %}
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="container">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'get_credit_offer' %}">Кредитные предложения <span class="sr-only">(current)</span></a>
@@ -31,7 +32,23 @@
         <a class="nav-link text-danger" href='admin' >Админ панель <span class="sr-only">(current)</span></a>
       </li>
     </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'users:logout' %}"> Выход <span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+        {% else %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'users:login' %}">Вход <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'users:registration' %}">Регистрация <span class="sr-only">(current)</span></a>
+        </li>
+        {% endif %}
+    </ul>
   </div>
+</div>
 </nav>
 
 {% block content %}
