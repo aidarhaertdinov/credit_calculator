@@ -35,7 +35,7 @@ router.register(r'api/v1/credits', CreditViewSet)
 router.register(r'api/v1/payments', PaymentViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='admin'),
+    path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('users/', include('users.urls', namespace='users')),
 

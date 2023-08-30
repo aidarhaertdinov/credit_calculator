@@ -28,4 +28,60 @@
 	{% endfor %}
 	</table>
 </div>
+<!-- pagination starts -->
+          <nav aria-label="...">
+            <ul class="pagination flex-wrap justify-content-center">
+              <li class="page-item disabled">
+                {% if list_payments.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="{{ request.path }}?page={{ list_payments.previous_page_number }}">⇇</a>
+                  </li>
+                {% endif %}
+                {% if list_payments.number > 3 %}
+                  <li class="page-item">
+                    <a class="page-link" href="{{ request.path }}?page=1">1</a>
+                  </li>
+                {% endif %}
+                {% if list_payments.number > 4 %}
+                    <li class="page-item">
+                    <span class="page-link">....</span>
+                    </li>
+                {% endif %}
+              </li>
+
+              {% for i in list_payments.paginator.page_range %}
+                {% if list_payments.number == i %}
+                  <li class="page-item active">
+                    <span class="page-link">
+                      {{ i }}
+                      <span class="sr-only"></span>
+                    </span>
+                  </li>
+                  {% elif i > list_payments.number|add:'-3' and i < list_payments.number|add:'3' %}
+                    <li class="page-item">
+                      <a class="page-link" href="{{ request.path }}?page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+              {% endfor %}
+
+              {% if list_payments.has_next %}
+                {% if list_payments.number < list_payments.paginator.num_pages|add:'-3' %}
+                    <li class="page-item">
+                        <span class="page-link">....</span>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ list_payments.paginator.num_pages }}">{{ list_payments.paginator.num_pages }}</a>
+                    </li>
+                {% elif list_payments.number < list_payments.paginator.num_pages|add:'-2' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ list_payments.paginator.num_pages }}">{{ list_payments.paginator.num_pages }}</a>
+                    </li>
+                {% endif %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ list_payments.next_page_number }}"> ⇉</a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+          <!-- pagination end -->
 {% endblock %}

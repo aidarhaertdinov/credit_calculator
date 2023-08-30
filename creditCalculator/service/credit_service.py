@@ -1,7 +1,7 @@
 from bank.models import Payment
 import math
 from dateutil.relativedelta import relativedelta
-import bank.views
+import bank
 
 
 def generate_payment_list_for_credit(сredit, creditOffer):
