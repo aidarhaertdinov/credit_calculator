@@ -18,7 +18,7 @@
   		</thead>
 	{% for payment in list_payments %}
 	<tr>
-		<td> {{ payment.payment_id }} </td>
+		<td> {{ forloop.counter0|add:list_payments.start_index }} </td>
         <td> {{ payment.date }} </td>
         <td> {{ payment.payment_amount }} </td>
 		<td> {{ payment.principal_amount}} </td>

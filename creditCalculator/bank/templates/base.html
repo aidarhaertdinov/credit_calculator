@@ -17,16 +17,16 @@
     <div class="container">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'get_credit_offer' %}">Кредитные предложения <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'bank:get_credit_offer' %}">Кредитные предложения <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'get_clients' %}">Клиенты <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'bank:get_clients' %}">Клиенты <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'get_credits' %}">Кредиты <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'bank:get_credits' %}">Кредиты <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'get_banks' %}">Банки <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'bank:get_banks' %}">Банки <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
           {% if user.is_superuser or user.is_staff %}

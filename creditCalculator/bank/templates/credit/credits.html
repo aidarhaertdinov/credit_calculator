@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container">
 	<div class="btn-group" role="group">
-		<a class="btn btn-outline-info" href="{% url 'create_credit' %}">Создать кредит</a>
+		<a class="btn btn-outline-info" href="{% url 'bank:create_credit' %}">Создать кредит</a>
 	</div>
 </div>
 <div class="container">
@@ -27,17 +27,17 @@
   		</thead>
 	{% for credit in credits %}
 	<tr>
-		<td> </td>
+		<td> {{ forloop.counter }} </td>
         <td> {{ credit.credit_name}}</td>
 		<td> {{ credit.credit_term}}</td>
 		<td> {{ credit.credit_amount}}</td>
 		<td> {{ credit.credit_offer.interest_rate}}</td>
         <td> {{ credit.credit_date}}</td>
         <td> {{ credit.credit_offer.bank}} {{ credit.credit_offer.client }} </td>
-		<td> <a href="{% url 'get_payment_for_credit' credit.pk  %}">
+		<td> <a href="{% url 'bank:get_payment_for_credit' credit.pk  %}">
 			<img class="icon-payment" src="{% static 'bank/images/icon-payment.png' %}"></a> </td>
-		<td> <a href="{% url 'edit_credit' credit.pk  %}"><img class="icon-edit" src="{% static 'bank/images/icon-edit.png' %}"></a> </td>
-		<td> <a href="{% url 'delete_credit' credit.pk   %}"><img class="icon-delete" src="{% static 'bank/images/icon-delete.png' %}"></a> </td>
+		<td> <a href="{% url 'bank:edit_credit' credit.pk  %}"><img class="icon-edit" src="{% static 'bank/images/icon-edit.png' %}"></a> </td>
+		<td> <a href="{% url 'bank:delete_credit' credit.pk   %}"><img class="icon-delete" src="{% static 'bank/images/icon-delete.png' %}"></a> </td>
 	</tr>
 	{% endfor %}
 	</table>

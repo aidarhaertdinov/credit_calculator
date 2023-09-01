@@ -6,7 +6,7 @@ import bank
 
 def generate_payment_list_for_credit(сredit, creditOffer):
 
-    bank.views.payment_view.PaymentView.delete_payment(сredit)
+    bank.views.payment_view.delete_payment(сredit)
     p = creditOffer[0].interest_rate / 12 / 100
     monthly_payment = round(сredit.credit_amount *
                             (p * math.pow((1 + p), сredit.credit_term) /

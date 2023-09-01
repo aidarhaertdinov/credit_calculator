@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container">
 	<div class="btn-group" role="group">
-		<a class="btn btn-outline-info" href="{% url 'create_client' %}">Создать нового клиента</a>
+		<a class="btn btn-outline-info" href="{% url 'bank:create_client' %}">Создать нового клиента</a>
 	</div>
 </div>
 <div class="container">
@@ -24,13 +24,13 @@
   		</thead>
 	{% for client in clients %}
 	<tr>
-		<td> </td>
+		<td> {{ forloop.counter }} </td>
 		<td> {{ client.last_name}} {{client.first_name}} {{client.patronymic }} </td>
         <td> {{ client.phone_number }} </td>
         <td> {{ client.email }} </td>
 		<td> {{ client.passport_series_number}} </td>
-		<td> <a href="{% url 'edit_client' client.pk %}"><img class="icon-edit" src="{% static 'bank/images/icon-edit.png' %}"></a> </td>
-		<td> <a href="{% url 'delete_client' client.pk %}"><img class="icon-delete" src="{% static 'bank/images/icon-delete.png' %}"></a> </td>
+		<td> <a href="{% url 'bank:edit_client' client.pk %}"><img class="icon-edit" src="{% static 'bank/images/icon-edit.png' %}"></a> </td>
+		<td> <a href="{% url 'bank:delete_client' client.pk %}"><img class="icon-delete" src="{% static 'bank/images/icon-delete.png' %}"></a> </td>
 	</tr>
 	{% endfor %}
 	</table>
